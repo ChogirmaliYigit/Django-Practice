@@ -1,0 +1,45 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Reservations {% endblock title %}
+
+{% block content %}
+
+<div class="col-md-10 offset-1 my-5">
+    <a href="{% url 'add_reservation' %}" class="btn btn-info my-5">Add reservation</a>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Crew</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Room</th>
+                <th scope="col">Total payment</th>
+                <th scope="col">Date</th>
+                <th scope="col">Date In</th>
+                <th scope="col">Date Out</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <th scope="row">{{ reservation.id }}</th>
+                <td>{{ reservation.crew }}</td>
+                <td>{{ reservation.customer }}</td>
+                <td>{{ reservation.room }}</td>
+                <td>{{ reservation.total_payment }}</td>
+                <td>{{ reservation.date }}</td>
+                <td>{{ reservation.date_in }}</td>
+                <td>{{ reservation.date_out }}</td>
+                <td>
+                    <a href="{% url 'update_reservation' reservation.id %}" class="btn btn-warning my-2">Edit</a>
+                    <a href="{% url 'delete_reservation' reservation.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Transactions {% endblock title %}
+
+{% block content %}
+
+<div class="col-md-10 offset-1 my-5">
+    <a href="{% url 'add_transaction' %}" class="btn btn-info my-5">Add transaction</a>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Crew</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Reservation</th>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <th scope="row">{{ transaction.id }}</th>
+                <td>{{ transaction.customer }}</td>
+                <td>{{ transaction.crew }}</td>
+                <td>{{ transaction.payment }}</td>
+                <td>{{ transaction.reservation }}</td>
+                <td>{{ transaction.trans_date }}</td>
+                <td>
+                    <a href="{% url 'update_transaction' transaction.id %}" class="btn btn-warning my-2">Edit</a>
+                    <a href="{% url 'delete_transaction' transaction.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

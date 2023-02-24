@@ -1,0 +1,41 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Accounts {% endblock title %}
+
+{% block content %}
+
+<div class="col-md-10 offset-1 my-5">
+    <a href="{% url 'add_crew' %}" class="btn btn-info my-5">Add crew</a>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Account</th>
+                <th scope="col">Name</th>
+                <th scope="col">Job title</th>
+                <th scope="col">Work assignment</th>
+                <th scope="col">Assignment details</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for crew in crews %}
+            <tr>
+                <th scope="row">{{ crew.id }}</th>
+                <td>{{ crew.account }}</td>
+                <td>{{ crew.name }}</td>
+                <td>{{ crew.job_title }}</td>
+                <td>{{ crew.assignment }}</td>
+                <td>{{ crew.details }}</td>
+                <td>
+                    <a href="{% url 'update_crew' crew.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'delete_crew' crew.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

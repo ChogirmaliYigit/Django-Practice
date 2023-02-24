@@ -1,0 +1,41 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Rooms {% endblock title %}
+
+{% block content %}
+
+<div class="col-md-8 offset-2 my-5">
+    <a href="{% url 'add_room' %}" class="btn btn-info my-5">Add room</a>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <th scope="row">{{ room.id }}</th>
+                <td>{{ room.type }}</td>
+                <td>{{ room.name }}</td>
+                <td>{{ room.description }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.status }}</td>
+                <td>
+                    <a href="{% url 'update_room' room.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'delete_room' room.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
